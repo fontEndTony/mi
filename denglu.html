@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登陆</title>
+	<style>
+	*{margin:0;padding:0;}
+	ul{list-style:none;}
+	a{text-decoration:none;color:#b0b0b0;}
+	
+	body{background:#f5f5f5;}
+	#big{width:800px;height:800px;position:relative;margin:0 auto;}
+	.box{width:800px;height:600px;position:relative;margin:0 auto;background:#fff;}
+	#img1{position:absolute;left:370px;top:50px;}
+	.box h3{position:absolute;left:320px;top:120px;font-size:25px;}
+	.box form{width:600px;position:absolute;left:250px;top:200px}
+	.box form input{width:300px;height:50px;}
+	
+/*隐藏样式*/
+	.zhanghao{position:absolute;left:340px;top:20px;ackground:red;}
+	.mima{position:absolute;left:340px;top:90px;}
+	
+	#denglu{background:#EF5B00;color:#fff;font-size:20px;}
+	.xian1{width:100px;height:1px;background:#b0b0b0;margin-top:10px;}
+	.xian2{width:100px;height:1px;background:#b0b0b0;margin-top:10px;}
+	.h5{color:#b0b0b0;}
+	.qita{width:300px;height:40px;position:absolute;left:250px;top:420px;}
+	.qita li{float:left;}
+	#img2{position:absolute;left:320px;top:470px;}
+	.dianji{position:absolute;left:300px;top:550px;}
+	.dianji li{color:#b0b0b0;float:left;margin-left:5px;}
+	.dianji li a:hover{color:red;}
+	.yuyan{width:300px;margin-left:300px;margin-top:100px;}
+	.yuyan li {color:#b0b0b0;float:left;margin-left:10px;}
+	.yuyan li a:hover{color:#000;}
+	.di{width:600px;height:30px;margin-top:150px;font-size:12px;color:#757575;margin-left:130px;}
+	
+	</style>
+</head>
+<body>
+	<div id="big">
+	<div class="box">
+		<img id="img1" src="images/mi.png">
+		<h3>小米账号登陆</h3>
+		<form class="box2">
+			<input type="text" name="username" placeholder="&nbsp 邮箱/手机号码/小米账号" value="">
+			<p class="zhanghao"></p><br><br>
+			<input type="password" name="password" placeholder="&nbsp 密码" value="">
+			<p class="mima"></p><br><br>
+			<input id="denglu" type="submit" name="username" value="立即登陆">
+		</form>
+		<ul class="qita">
+			<li class="xian1"></li>
+			<li class="h5">其他方式登陆</li>
+			<li class="xian2"></li>
+		</ul>
+		<a href=""><img id="img2" src="images/2016-06-08_101937.png"></a>
+		<ul class="dianji">
+			<li><a href="2.html" target="_blank">注册小米账号</a><span> |</span></li>
+			<li><a href="">忘记密码?</a></li>
+		</ul>
+	</div>
+		<ul class="yuyan">
+			<li><a href="">简体</a><span> |</span></li>
+			<li><a href="">繁体</a><span> |</span></li>
+			<li><a href="">English</a><span> |</span></li>
+			<li><a href="">常见问题</a></li>
+		</ul>
+		<div class="di">小米公司版权所有-京ICP备10046444-<image src="images/ghs.png"><a href="">京公网安备11010802020134号-京ICP证110507号</a></div>
+	</div>
+	<script src="js/jquery-1.8.3.min.js"></script>
+	<script>
+		$(function(){
+			var uBool = false;
+			var pBool = false;
+			$('input[name="username"]').focus(function(){
+				uBool = false;
+				$(this).next().replaceWith('<p class="zhanghao" style="color:#ddd;">请输入您的账号</p>');
+			}).blur(function(){
+				uBool = false;
+				var value = $(this).val();
+				var td = $(this).next();
+				var value = $(this).val();
+				var reg = /^[a-zA-Z_-]{4,12}$/;
+				if (value.length == 0) {	// 用户名为空
+					td.replaceWith('<p class="zhanghao" style="color:red;"><img src="images/error.png" alt="" /> 用户名不能为空</p>');
+				}else if(!reg.test(value)){
+					td.replaceWith('<p class="zhanghao" style="color:red;"><img src="images/error.png" alt="" /> 用户名错误</p>');
+				}else {
+					td.replaceWith('<p class="zhanghao" style="color:green;"><img src="images/right.png" alt="" /> 用户名正确</p>');
+					uBool = true;
+				}
+			})
+			$('input[name="password"]').focus(function(){
+				pBool = false;
+				$(this).next().replaceWith('<p class="mima" style="color:#ddd;">请输入您的密码</p>');
+			}).blur(function(){
+				pBool = false;
+				var value = $(this).val();
+				var td = $(this).next();
+				var value = $(this).val();
+				var reg = /^[a-zA-Z0-9_-]{4,8}$/;
+				if (value.length == 0) {	// 密码为空
+					td.replaceWith('<p class="mima" style="color:red;"><img src="images/error.png" alt="" /> 密码不能为空</p>');
+				}else if(!reg.test(value)){
+					td.replaceWith('<p class="mima" style="color:red;"><img src="images/error.png" alt="" /> 密码错误</p>');
+				}else {
+					td.replaceWith('<p class="mima" style="color:green;"><img src="images/right.png" alt="" /> 密码正确</p>');
+					pBool = true;
+				}
+			})
+			$('form').submit(function(){
+			// 必须用户名和密码都正确的情况，才能够提交
+			if (uBool && pBool) {
+				alert('登陆成功');
+			} else {
+				alert('登陆失败');
+				return false;
+			}
+			})
+		})
+	</script>
+</body>
+</html>
